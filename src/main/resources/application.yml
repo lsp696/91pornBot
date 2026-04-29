@@ -1,29 +1,26 @@
-
 spring:
   profiles:
-#    active: dev
     active: prod
-
 
 server:
   tomcat:
     acceptCount: 700
     max-connections: 20000
     max-threads: 60
-    min-SpareThreads: 100
+    min-spare-threads: 100
     uri-encoding: UTF-8
 
+myappconfig:
+  proxy_on: true
+  ffmpeg_root: "/usr/bin/"
+  mp4box_root: "/usr/local/bin/MP4Box"
+  fileroot: "/video/"
+  chat_id: "YOUR_CHAT_ID"
+  bot_token: "YOUR_BOT_TOKEN"
 
-
-log4j:
-  logger:
-    com:
-      gargoylesoftware:
-        htmlunit: fatal
-        htmlunit.WebTestCase: fatal
-        htmlunit.javascript.DebugFrameImpl: fatal
-    httpclient:
-      wire: fatal
-    org:
-      apache:
-        commons: fatal
+logging:
+  file:
+    path: /video/
+    name: 91porn.log
+  level:
+    root: info

@@ -1,38 +1,33 @@
 package com.example.demo.utils;
 
-
 import lombok.extern.slf4j.Slf4j;
-
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+/**
+ * 子进程输出消费线程
+ * 防止管道缓冲区满导致进程阻塞
+ */
 @Slf4j
-class RunThread extends Thread
-{
-    InputStream is;
-    String type;
-    
-    RunThread(InputStream is, String printType)
-    {
+public class RunThread extends Thread {
+    private final InputStream is;
+    private final String name;
+
+    public RunThread(InputStream is, String name) {
         this.is = is;
-        this.type = printType;
+        this.name = name;
     }
-    
+
     @Override
-    public void run()
-    {
-        try
-        {
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(isr);
+    public void run() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             String line;
-            while ( (line = br.readLine()) != null) {
-                log.info(type + ">" + line);
+            while ((line = br.readLine()) != null) {
+                log.debug("[{}] {}", name, line);
             }
-            } catch (IOException ioe)
-              {
-                ioe.printStackTrace();
-              }
+        } catch (Exception e) {
+            // ignore
+        }
     }
 }
