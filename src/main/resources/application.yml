@@ -15,8 +15,8 @@ myappconfig:
   ffmpeg_root: "/usr/bin/"
   mp4box_root: "/usr/local/bin/MP4Box"
   fileroot: "/video/"
-  chat_id: "YOUR_CHAT_ID"
-  bot_token: "YOUR_BOT_TOKEN"
+  chat_id: "PLACEHOLDER"
+  bot_token: "PLACEHOLDER"
 
 logging:
   file:
